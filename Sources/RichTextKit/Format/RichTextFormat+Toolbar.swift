@@ -67,9 +67,6 @@ public extension RichTextFormat {
             .padding(.vertical, style.padding)
             .environment(\.sizeCategory, .medium)
             .background(background)
-            #if macOS
-            .frame(minWidth: 650)
-            #endif
         }
     }
 }
