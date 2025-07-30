@@ -272,8 +272,8 @@ private extension RichTextKeyboardToolbar {
             }
             .richTextKeyboardToolbarConfig(.init(
                 alwaysDisplayToolbar: false,
-                leadingActions: [.print],
-                trailingActions: [.print]
+                leadingActions: [],
+                trailingActions: []
             ))
         }
     }

@@ -81,7 +81,6 @@ private extension RichTextAction.Button {
                     HStack {
                         button(for: .copy)
                         button(for: .dismissKeyboard)
-                        button(for: .print)
                         button(for: .redoLatestChange)
                         button(for: .undoLatestChange)
                     }

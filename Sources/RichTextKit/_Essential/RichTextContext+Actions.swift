@@ -24,10 +24,7 @@ public extension RichTextContext {
         case .deleteSelectedText: hasSelectedRange
         case .deleteText: true
         case .dismissKeyboard: true
-        case .pasteImage: true
-        case .pasteImages: true
         case .pasteText: true
-        case .print: false
         case .redoLatestChange: canRedoLatestChange
         case .replaceSelectedText: hasSelectedRange
         case .replaceText: true

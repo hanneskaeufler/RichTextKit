@@ -38,7 +38,6 @@ public extension View {
         switch action {
         case .copy: self.keyboardShortcut("c", modifiers: .command)
         case .dismissKeyboard: self
-        case .print: self.keyboardShortcut("p", modifiers: .command)
         case .redoLatestChange: self.keyboardShortcut("z", modifiers: [.command, .shift])
         case .setAlignment(let align): self.keyboardShortcut(for: align)
         case .stepFontSize(let points): self.keyboardShortcut(points < 0 ? "-" : "+", modifiers: .command)

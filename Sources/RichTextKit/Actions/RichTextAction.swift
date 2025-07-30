@@ -28,17 +28,8 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Delete text in a certain range.
     case deleteText(in: NSRange)
 
-    /// Paste a single image.
-    case pasteImage(RichTextInsertion<ImageRepresentable>)
-
-    /// Paste multiple images.
-    case pasteImages(RichTextInsertion<[ImageRepresentable]>)
-
     /// Paste plain text.
     case pasteText(RichTextInsertion<String>)
-
-    /// A print command.
-    case print
 
     /// Redo the latest undone change.
     case redoLatestChange
@@ -106,10 +97,7 @@ public extension RichTextAction {
         case .deleteSelectedText: .richTextDelete
         case .deleteText: .richTextDelete
         case .dismissKeyboard: .richTextDismissKeyboard
-        case .pasteImage: .richTextDocuments
-        case .pasteImages: .richTextDocuments
         case .pasteText: .richTextDocuments
-        case .print: .richTextPrint
         case .redoLatestChange: .richTextRedo
         case .replaceSelectedText: .richTextReplace
         case .replaceText: .richTextReplace
@@ -160,10 +148,7 @@ public extension RichTextAction {
         case .deleteSelectedText: .actionDelete
         case .deleteText: .actionDelete
         case .dismissKeyboard: .actionDismissKeyboard
-        case .pasteImage: .pasteImage
-        case .pasteImages: .pasteImages
         case .pasteText: .pasteText
-        case .print: .actionPrint
         case .redoLatestChange: .actionRedoLatestChange
         case .replaceSelectedText: .actionDelete
         case .replaceText: .actionDelete

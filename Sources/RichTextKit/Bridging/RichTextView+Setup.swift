@@ -16,9 +16,6 @@ extension RichTextView {
         _ format: RichTextDataFormat
     ) {
         attributedString = .empty
-        if !imageConfigurationWasSet {
-            imageConfiguration = standardImageConfiguration(for: format)
-        }
         attributedString = text
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }

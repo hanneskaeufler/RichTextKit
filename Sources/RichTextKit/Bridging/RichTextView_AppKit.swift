@@ -35,53 +35,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
     /// The image configuration to use by the rich text view.
-    public var imageConfiguration: RichTextImageConfiguration = .disabled {
-        didSet { imageConfigurationWasSet = true }
-    }
-
-    /// The image configuration to use by the rich text view.
     var imageConfigurationWasSet = false
-
-    // MARK: - Overrides
-
-    /// Paste the current pasteboard content into the view.
-    open override func paste(_ sender: Any?) {
-        let pasteboard = NSPasteboard.general
-        if let image = pasteboard.image {
-            return pasteImage(image, at: selectedRange.location)
-        }
-        super.paste(sender)
-    }
-
-    /**
-     Try to perform a certain drag operation, which will get
-     and paste images from the drag info into the text.
-     */
-    open override func performDragOperation(_ draggingInfo: NSDraggingInfo) -> Bool {
-        let pasteboard = draggingInfo.draggingPasteboard
-        if let images = pasteboard.images, images.count > 0 {
-            pasteImages(images, at: selectedRange().location, moveCursorToPastedContent: true)
-            return true
-        }
-        // Handle fileURLs that contain known image types
-        let images = pasteboard.pasteboardItems?.compactMap {
-            if let str = $0.string(forType: NSPasteboard.PasteboardType.fileURL),
-               let url = URL(string: str), let image = ImageRepresentable(contentsOf: url) {
-                let fileExtension = url.pathExtension.lowercased()
-                let imageExtensions = ["jpg", "jpeg", "png", "gif", "tiff", "bmp", "heic"]
-                if imageExtensions.contains(fileExtension) {
-                    return image
-                }
-            }
-            return nil
-        } ?? [ImageRepresentable]()
-        if images.count > 0 {
-            pasteImages(images, at: selectedRange().location, moveCursorToPastedContent: true)
-            return true
-        }
-
-        return super.performDragOperation(draggingInfo)
-    }
 
     open override func scrollWheel(with event: NSEvent) {
 

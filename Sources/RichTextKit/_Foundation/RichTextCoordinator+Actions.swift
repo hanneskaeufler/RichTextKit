@@ -18,10 +18,7 @@ extension RichTextCoordinator {
         case .deleteSelectedText: textView.deleteText(in: textView.selectedRange)
         case .deleteText(let range): textView.deleteText(in: range)
         case .dismissKeyboard: textView.resignFirstResponder()
-        case .pasteImage(let image): pasteImage(image)
-        case .pasteImages(let images): pasteImages(images)
         case .pasteText(let text): pasteText(text)
-        case .print: break
         case .redoLatestChange:
             textView.redoLatestChange()
             syncContextWithTextView()
@@ -53,31 +50,11 @@ extension RichTextCoordinator {
 extension RichTextCoordinator {
 
     func paste<T: RichTextInsertable>(_ data: RichTextInsertion<T>) {
-        if let data = data as? RichTextInsertion<ImageRepresentable> {
-            pasteImage(data)
-        } else if let data = data as? RichTextInsertion<[ImageRepresentable]> {
-            pasteImages(data)
-        } else if let data = data as? RichTextInsertion<String> {
+        if let data = data as? RichTextInsertion<String> {
             pasteText(data)
         } else {
             print("Unsupported media type")
         }
-    }
-
-    func pasteImage(_ data: RichTextInsertion<ImageRepresentable>) {
-        textView.pasteImage(
-            data.content,
-            at: data.index,
-            moveCursorToPastedContent: data.moveCursor
-        )
-    }
-
-    func pasteImages(_ data: RichTextInsertion<[ImageRepresentable]>) {
-        textView.pasteImages(
-            data.content,
-            at: data.index,
-            moveCursorToPastedContent: data.moveCursor
-        )
     }
 
     func pasteText(_ data: RichTextInsertion<String>) {

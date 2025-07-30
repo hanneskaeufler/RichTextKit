@@ -68,8 +68,6 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
     highlightedRange,
     highlightingStyle,
 
-    pasteImage,
-    pasteImages,
     pasteText,
     selectRange,
 

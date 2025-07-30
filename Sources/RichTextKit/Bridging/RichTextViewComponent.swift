@@ -28,9 +28,7 @@ public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
     RichTextAttributeReader,
     RichTextAttributeWriter,
-    RichTextDataReader,
-    RichTextImageAttachmentManager,
-    RichTextPdfDataReader
+    RichTextDataReader
 {
 
     /// The text view's frame.
@@ -39,19 +37,14 @@ public protocol RichTextViewComponent: AnyObject,
     /// The style to use when highlighting text in the view.
     var highlightingStyle: RichTextHighlightingStyle { get set }
 
-    /// The image configuration used by the rich text view.
-    var imageConfiguration: RichTextImageConfiguration { get set }
-
     /// Whether or not the text view is the first responder.
     var isFirstResponder: Bool { get }
 
-    #if iOS || macOS || os(tvOS) || os(visionOS)
     /// The text view's layout manager, if any.
     var layoutManagerWrapper: NSLayoutManager? { get }
 
     /// The text view's text storage, if any.
     var textStorageWrapper: NSTextStorage? { get }
-    #endif
 
     /// The text view's mutable attributed string, if any.
     var mutableAttributedString: NSMutableAttributedString? { get }
@@ -125,23 +118,5 @@ public extension RichTextViewComponent {
     ) throws {
         let string = try NSAttributedString(data: data, format: format)
         setup(with: string, format: format)
-    }
-
-    /// Get the image configuration for a certain format.
-    func standardImageConfiguration(
-        for format: RichTextDataFormat
-    ) -> RichTextImageConfiguration {
-        let insertConfig = standardImageInsertConfiguration(for: format)
-        return RichTextImageConfiguration(
-            pasteConfiguration: insertConfig,
-            dropConfiguration: insertConfig,
-            maxImageSize: (width: .frame, height: .frame))
-    }
-
-    /// Get the image insert config for a certain format.
-    func standardImageInsertConfiguration(
-        for format: RichTextDataFormat
-    ) -> RichTextImageInsertConfiguration {
-        format.supportsImages ? .enabled : .disabled
     }
 }

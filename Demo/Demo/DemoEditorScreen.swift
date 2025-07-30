@@ -66,6 +66,9 @@ struct DemoEditorScreen: View {
         )
         .richTextFormatToolbarConfig(.init(colorPickers: []))
         .viewDebug()
+        .onChange(of: document.text) { oldValue, newValue in
+            print("FIRE")
+        }
     }
 }
 
