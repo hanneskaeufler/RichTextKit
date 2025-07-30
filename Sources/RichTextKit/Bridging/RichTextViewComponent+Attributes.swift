@@ -10,6 +10,11 @@ import Foundation
 
 public extension RichTextViewComponent {
 
+    /// Get the rich text font at current range.
+    var richTextFont: FontRepresentable? {
+        richTextAttributes[.font] as? FontRepresentable ?? typingAttributes[.font] as? FontRepresentable
+    }
+
     /// Get all attributes.
     var richTextAttributes: RichTextAttributes {
         if hasSelectedRange {

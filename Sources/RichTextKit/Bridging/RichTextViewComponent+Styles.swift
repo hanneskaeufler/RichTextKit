@@ -14,8 +14,8 @@ public extension RichTextViewComponent {
     /// Get all styles.
     var richTextStyles: [RichTextStyle] {
         let attributes = richTextAttributes
-        let traits = NSFont.preferredFont(forTextStyle: .body).fontDescriptor.symbolicTraits
-        var styles = traits.enabledRichTextStyles
+        let traits = richTextFont?.fontDescriptor.symbolicTraits
+                var styles = traits?.enabledRichTextStyles ?? []
         if attributes.isStrikethrough { styles.append(.strikethrough) }
         if attributes.isUnderlined { styles.append(.underlined) }
         return styles
