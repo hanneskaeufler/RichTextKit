@@ -39,12 +39,6 @@ struct DemoEditorScreen: View {
             )
             #endif
         }
-        .inspector(isPresented: $isInspectorPresented) {
-            RichTextFormat.Sidebar(context: context)
-                #if os(macOS)
-                .inspectorColumnWidth(min: 200, ideal: 200, max: 315)
-                #endif
-        }
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Toggle(isOn: $isInspectorPresented) {
@@ -57,13 +51,6 @@ struct DemoEditorScreen: View {
         .frame(minWidth: 500)
         .focusedValue(\.richTextContext, context)
         .toolbarRole(.automatic)
-        .richTextFormatSheetConfig(.init(colorPickers: colorPickers))
-        .richTextFormatSidebarConfig(
-            .init(
-                colorPickers: colorPickers,
-                fontPicker: isMac
-            )
-        )
         .richTextFormatToolbarConfig(.init(colorPickers: []))
         .viewDebug()
         .onChange(of: document.text) { oldValue, newValue in

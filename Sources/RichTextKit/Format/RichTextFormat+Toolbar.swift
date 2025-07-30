@@ -58,10 +58,6 @@ public extension RichTextFormat {
         public var body: some View {
             VStack(spacing: style.spacing) {
                 controls
-                if hasColorPickers {
-                    Divider()
-                    colorPickers(for: context)
-                }
             }
             .labelsHidden()
             .padding(.vertical, style.padding)
@@ -111,22 +107,13 @@ private extension RichTextFormat.Toolbar {
     @ViewBuilder
     var controlsContent: some View {
         HStack {
-            #if macOS
-            fontPicker(value: $context.fontName)
-            #endif
             styleToggleGroup(for: context)
             if !useSingleLine {
                 Spacer()
             }
-            fontSizePicker(for: context)
             if horizontalSizeClass == .regular {
                 Spacer()
             }
-        }
-        HStack {
-            alignmentPicker(for: context)
-            superscriptButtons(for: context, greedy: false)
-            indentButtons(for: context, greedy: false)
         }
     }
 }

@@ -22,8 +22,6 @@ extension RichTextCoordinator {
         }
         .store(in: &cancellables)
 
-        subscribeToContextFontName()
-        subscribeToContextFontSize()
         subscribeToContextParagraphStyle()
         subscribeToContextIsEditable()
     }
@@ -38,18 +36,6 @@ private extension RichTextCoordinator {
         publisher
             .sink(receiveValue: action)
             .store(in: &cancellables)
-    }
-
-    func subscribeToContextFontName() {
-        subscribe(to: context.$fontName) { [weak self] in
-            self?.textView.setRichTextFontName($0)
-        }
-    }
-
-    func subscribeToContextFontSize() {
-        subscribe(to: context.$fontSize) { [weak self] in
-            self?.textView.setRichTextFontSize($0)
-        }
     }
 
     func subscribeToContextParagraphStyle() {

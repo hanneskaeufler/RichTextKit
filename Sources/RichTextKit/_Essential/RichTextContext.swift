@@ -52,12 +52,6 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the text is currently being edited.
     @Published public var isEditingText = false
 
-    /// The current font name.
-    @Published public var fontName = RichTextFont.PickerFont.all.first?.fontName ?? ""
-
-    /// The current font size.
-    @Published public var fontSize = CGFloat.standardRichTextFontSize
-
 
     // MARK: - Observable Properties
 

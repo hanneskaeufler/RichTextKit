@@ -6,19 +6,10 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
 /// This typealias bridges platform-specific font traits.
 public typealias FontTraitsRepresentable = NSFontDescriptor.SymbolicTraits
-#endif
-
-#if canImport(UIKit)
-import UIKit
-
-/// This typealias bridges platform-specific font traits.
-public typealias FontTraitsRepresentable = UIFontDescriptor.SymbolicTraits
-#endif
 
 public extension FontTraitsRepresentable {
 

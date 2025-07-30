@@ -170,14 +170,11 @@ extension RichTextCoordinator {
 
     /// Sync the rich text context with the text view.
     func syncContextWithTextViewAfterDelay() {
-        let font = textView.richTextFont ?? .standardRichTextFont
         sync(&context.attributedString, with: textView.attributedString)
         sync(&context.selectedRange, with: textView.selectedRange)
         sync(&context.canCopy, with: textView.hasSelectedRange)
         sync(&context.canRedoLatestChange, with: textView.undoManager?.canRedo ?? false)
         sync(&context.canUndoLatestChange, with: textView.undoManager?.canUndo ?? false)
-        sync(&context.fontName, with: font.fontName)
-        sync(&context.fontSize, with: font.pointSize)
         sync(&context.isEditingText, with: textView.isFirstResponder)
         sync(&context.paragraphStyle, with: textView.richTextParagraphStyle ?? .defaultMutable)
 

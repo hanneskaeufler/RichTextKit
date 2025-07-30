@@ -6,25 +6,16 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if canImport(UIKit)
-import UIKit
-
-/// This typealias bridges platform-specific fonts.
-public typealias FontRepresentable = UIFont
-#endif
-
-#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
 /// This typealias bridges platform-specific fonts.
 public typealias FontRepresentable = NSFont
-#endif
 
 public extension FontRepresentable {
 
     /// The standard font to use for rich text.
     static var standardRichTextFont: FontRepresentable {
-        .systemFont(ofSize: .standardRichTextFontSize)
+        .preferredFont(forTextStyle: .body)
     }
 
     /// Create a new font by toggling a certain style.

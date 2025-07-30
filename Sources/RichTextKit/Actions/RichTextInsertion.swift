@@ -12,8 +12,6 @@ import Foundation
 public protocol RichTextInsertable: Hashable, Equatable {}
 
 extension String: RichTextInsertable {}
-extension ImageRepresentable: RichTextInsertable {}
-extension [ImageRepresentable]: RichTextInsertable {}
 extension NSAttributedString: RichTextInsertable {}
 
 /// This struct represents something that should be inserted
@@ -58,24 +56,6 @@ public extension RichTextInsertion {
 }
 
 public extension RichTextInsertion {
-
-    /// This is a shorthand for creating an image insertion.
-    static func image(
-        _ image: ImageRepresentable,
-        at index: Int,
-        moveCursor: Bool
-    ) -> RichTextInsertion<ImageRepresentable> {
-        .init(content: image, index: index, moveCursor: moveCursor)
-    }
-
-    /// This is a shorthand for creating an image insertion.
-    static func images(
-        _ images: [ImageRepresentable],
-        at index: Int,
-        moveCursor: Bool
-    ) -> RichTextInsertion<[ImageRepresentable]> {
-        .init(content: images, index: index, moveCursor: moveCursor)
-    }
 
     /// This is a shorthand for creating a text insertion.
     static func text(

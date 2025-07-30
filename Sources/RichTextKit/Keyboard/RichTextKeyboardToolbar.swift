@@ -179,9 +179,6 @@ private extension RichTextKeyboardToolbar {
 
         RichTextStyle.ToggleStack(context: context)
             .keyboardShortcutsOnly(if: isCompact)
-
-        RichTextFont.SizePickerStack(context: context)
-            .keyboardShortcutsOnly()
     }
 
     @ViewBuilder
