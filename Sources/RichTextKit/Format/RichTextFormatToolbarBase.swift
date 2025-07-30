@@ -143,16 +143,6 @@ extension RichTextFormatToolbarBase {
     }
 
     @ViewBuilder
-    func lineSpacingPicker(
-        for context: RichTextContext
-    ) -> some View {
-        if config.lineSpacingPicker {
-            RichTextLine.SpacingPickerStack(context: context)
-                .buttonStyle(.bordered)
-        }
-    }
-
-    @ViewBuilder
     func styleToggleGroup(
         for context: RichTextContext
     ) -> some View {

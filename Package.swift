@@ -6,11 +6,7 @@ let package = Package(
     name: "RichTextKit",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v15),
         .macOS(.v12),
-        .tvOS(.v15),
-        .watchOS(.v8),
-        .visionOS(.v1)
     ],
     products: [
         .library(
@@ -31,7 +27,6 @@ let package = Package(
             resources: [.process("Resources")],
             swiftSettings: [
                 .define("macOS", .when(platforms: [.macOS])),
-                .define("iOS", .when(platforms: [.iOS, .macCatalyst]))
             ]
         ),
         .testTarget(
@@ -39,7 +34,6 @@ let package = Package(
             dependencies: ["RichTextKit", "MockingKit"],
             swiftSettings: [
                 .define("macOS", .when(platforms: [.macOS])),
-                .define("iOS", .when(platforms: [.iOS, .macCatalyst]))
             ]
         )
     ]
