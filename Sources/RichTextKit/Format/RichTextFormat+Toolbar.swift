@@ -130,14 +130,7 @@ private extension RichTextFormat.Toolbar {
                 context: context
             )
             .richTextFormatToolbarConfig(.init(
-                alignments: [.left, .right],
-                colorPickers: [.foreground],
-                colorPickersDisclosed: [.background],
-                fontPicker: false,
-                fontSizePicker: true,
-                indentButtons: true,
                 styles: .all,
-                superscriptButtons: true
             ))
         }
 

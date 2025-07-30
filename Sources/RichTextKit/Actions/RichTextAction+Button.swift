@@ -84,19 +84,6 @@ private extension RichTextAction.Button {
                         button(for: .undoLatestChange)
                     }
                     HStack {
-                        ForEach(NSTextAlignment.defaultPickerValues) {
-                            button(for: .setAlignment($0))
-                        }
-                    }
-                    HStack {
-                        button(for: .stepFontSize(points: 1))
-                        button(for: .stepFontSize(points: -1))
-                        button(for: .stepIndent(points: 1))
-                        button(for: .stepIndent(points: -1))
-                        button(for: .stepSuperscript(steps: 1))
-                        button(for: .stepSuperscript(steps: -1))
-                    }
-                    HStack {
                         ForEach(RichTextStyle.allCases) {
                             button(for: .toggleStyle($0))
                         }

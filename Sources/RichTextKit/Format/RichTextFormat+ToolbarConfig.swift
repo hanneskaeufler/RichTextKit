@@ -15,40 +15,12 @@ public extension RichTextFormat {
     struct ToolbarConfig {
 
         public init(
-            alignments: [NSTextAlignment] = .defaultPickerValues,
-            colorPickers: [RichTextColor] = [.foreground],
-            colorPickersDisclosed: [RichTextColor] = [],
-            fontPicker: Bool = true,
-            fontSizePicker: Bool = true,
-            indentButtons: Bool = true,
-            lineSpacingPicker: Bool = false,
             styles: [RichTextStyle] = .all,
-            superscriptButtons: Bool = true
         ) {
-            self.alignments = alignments
-            self.colorPickers = colorPickers
-            self.colorPickersDisclosed = colorPickersDisclosed
-            self.fontPicker = fontPicker
-            self.fontSizePicker = fontSizePicker
-            self.indentButtons = indentButtons
-            self.lineSpacingPicker = lineSpacingPicker
             self.styles = styles
-            #if macOS
-            self.superscriptButtons = superscriptButtons
-            #else
-            self.superscriptButtons = false
-            #endif
         }
 
-        public var alignments: [NSTextAlignment]
-        public var colorPickers: [RichTextColor]
-        public var colorPickersDisclosed: [RichTextColor]
-        public var fontPicker: Bool
-        public var fontSizePicker: Bool
-        public var indentButtons: Bool
-        public var lineSpacingPicker: Bool
         public var styles: [RichTextStyle]
-        public var superscriptButtons: Bool
     }
 }
 

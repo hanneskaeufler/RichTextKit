@@ -28,17 +28,10 @@ public extension RichTextContext {
         case .replaceSelectedText: hasSelectedRange
         case .replaceText: true
         case .selectRange: true
-        case .setAlignment: true
         case .setAttributedString: true
-        case .setColor: true
-        case .setHighlightedRange: true
         case .setHighlightingStyle: true
         case .setParagraphStyle: true
         case .setStyle: true
-        case .stepFontSize: true
-        case .stepIndent: true
-        case .stepLineSpacing: true
-        case .stepSuperscript: true
         case .toggleStyle: true
         case .undoLatestChange: canUndoLatestChange
         }

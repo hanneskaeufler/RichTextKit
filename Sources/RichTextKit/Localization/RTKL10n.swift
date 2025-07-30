@@ -93,47 +93,6 @@ public enum RTKL10n: String, CaseIterable, Identifiable {
 
 public extension RTKL10n {
 
-    static func actionStepFontSize(
-        _ points: Int
-    ) -> RTKL10n {
-        points < 0 ?
-            .fontSizeDecreaseDescription :
-            .fontSizeIncreaseDescription
-    }
-
-    static func actionStepIndent(
-        _ points: Double
-    ) -> RTKL10n {
-        points < 0 ?
-            .indentDecreaseDescription :
-            .indentIncreaseDescription
-    }
-
-    static func actionStepLineSpacing(
-        _ points: CGFloat
-    ) -> RTKL10n {
-        points < 0 ?
-            .lineSpacingDecreaseDescription :
-            .lineSpacingIncreaseDescription
-    }
-
-    static func actionStepSuperscript(
-        _ steps: Int
-    ) -> RTKL10n {
-        steps < 0 ?
-            .superscriptDecreaseDescription :
-            .superscriptIncreaseDescription
-    }
-
-    static func menuIndent(_ points: Double) -> RTKL10n {
-        points < 0 ?
-            .indentDecrease :
-            .indentIncrease
-    }
-}
-
-public extension RTKL10n {
-
     /// The item's unique identifier.
     var id: String { rawValue }
 

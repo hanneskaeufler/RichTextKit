@@ -40,17 +40,8 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Select a range.
     case selectRange(NSRange)
 
-    /// Set the text alignment.
-    case setAlignment(_ alignment: NSTextAlignment)
-
     /// Set the entire attributed string.
     case setAttributedString(NSAttributedString)
-
-    // Change background color
-    case setColor(RichTextColor, ColorRepresentable)
-
-    // Highlighted renge
-    case setHighlightedRange(NSRange?)
 
     // Change highlighting style
     case setHighlightingStyle(RichTextHighlightingStyle)
@@ -58,20 +49,8 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
 
-    /// Step the font size.
-    case stepFontSize(points: Int)
-
-    /// Step the indent level.
-    case stepIndent(points: CGFloat)
-
-    /// Step the line spacing.
-    case stepLineSpacing(points: CGFloat)
-
     /// Set the current paragraph style.
     case setParagraphStyle(_ style: NSMutableParagraphStyle)
-
-    /// Step the superscript level.
-    case stepSuperscript(steps: Int)
 
     /// Toggle a certain style.
     case toggleStyle(_ style: RichTextStyle)
@@ -98,17 +77,10 @@ public extension RichTextAction {
         case .replaceSelectedText: .richTextReplace
         case .replaceText: .richTextReplace
         case .selectRange: .richTextSelection
-        case .setAlignment(let val): val.defaultIcon
         case .setAttributedString: .richTextDocument
-        case .setColor(let color, _): color.icon
-        case .setHighlightedRange: .richTextAlignmentCenter
         case .setHighlightingStyle: .richTextAlignmentCenter
         case .setParagraphStyle: .richTextAlignmentLeft
         case .setStyle(let style, _): style.icon
-        case .stepFontSize(let val): .richTextStepFontSize(val)
-        case .stepIndent(let val): .richTextStepIndent(val)
-        case .stepLineSpacing(let val): .richTextStepLineSpacing(val)
-        case .stepSuperscript(let val): .richTextStepSuperscript(val)
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextUndo
         }
@@ -126,10 +98,7 @@ public extension RichTextAction {
 
     /// The localized title key to use in the main menu.
     var menuTitleKey: RTKL10n {
-        switch self {
-        case .stepIndent(let points): .menuIndent(points)
-        default: titleKey
-        }
+        titleKey
     }
 
     /// The localized action title.
@@ -148,17 +117,10 @@ public extension RichTextAction {
         case .replaceSelectedText: .actionDelete
         case .replaceText: .actionDelete
         case .selectRange: .selectRange
-        case .setAlignment(let alignment): alignment.defaultTitleKey
         case .setAttributedString: .setAttributedString
-        case .setColor(let color, _): color.titleKey
-        case .setHighlightedRange: .highlightedRange
         case .setHighlightingStyle: .highlightingStyle
         case .setParagraphStyle: .textAlignmentLeft
         case .setStyle(let style, _): style.titleKey
-        case .stepFontSize(let points): .actionStepFontSize(points)
-        case .stepIndent(let points): .actionStepIndent(points)
-        case .stepLineSpacing(let points): .actionStepLineSpacing(points)
-        case .stepSuperscript(let steps): .actionStepSuperscript(steps)
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange
         }

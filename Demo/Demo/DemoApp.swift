@@ -21,10 +21,7 @@ struct DemoApp: App {
         }
         .commands {
             SidebarCommands()
-            #if os(macOS)
             AboutCommand()
-            #endif
-            RichTextCommand.FormatMenu()
 
             CommandMenu("RichTextKit") {
                 DemoUrl.github.link

@@ -6,7 +6,6 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
 
 /// This typealias bridges platform-specific font descriptors.
@@ -24,24 +23,3 @@ public extension FontDescriptorRepresentable {
         }
     }
 }
-#endif
-
-#if canImport(UIKit)
-import UIKit
-
-/// This typealias bridges platform-specific font descriptors.
-public typealias FontDescriptorRepresentable = UIFontDescriptor
-
-public extension FontDescriptorRepresentable {
-
-    /// Get a new font descriptor by toggling a text style.
-    func byTogglingStyle(_ style: RichTextStyle) -> FontDescriptorRepresentable {
-        guard let traits = style.symbolicTraits else { return self }
-        if symbolicTraits.contains(traits) {
-            return withSymbolicTraits(symbolicTraits.subtracting(traits)) ?? self
-        } else {
-            return withSymbolicTraits(symbolicTraits.union(traits)) ?? self
-        }
-    }
-}
-#endif

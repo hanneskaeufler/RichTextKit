@@ -23,20 +23,10 @@ extension RichTextCoordinator {
         case .replaceSelectedText(let text): textView.replaceText(in: textView.selectedRange, with: text)
         case .replaceText(let range, let text): textView.replaceText(in: range, with: text)
         case .selectRange(let range): setSelectedRange(to: range)
-        case .setAlignment(let alignment): textView.setRichTextParagraphStyleValue(\.alignment, alignment)
         case .setAttributedString(let string): setAttributedString(to: string)
-        case .setColor(let color, let newValue): setColor(color, to: newValue)
-        case .setHighlightedRange(let range): setHighlightedRange(to: range)
         case .setHighlightingStyle(let style): textView.highlightingStyle = style
         case .setParagraphStyle(let style): textView.setRichTextParagraphStyle(style)
         case .setStyle(let style, let newValue): setStyle(style, to: newValue)
-        case .stepFontSize(let points):
-            textView.stepRichTextFontSize(points: points)
-            syncContextWithTextView()
-        case .stepIndent(let points): textView.stepRichTextParagraphStyleValue(\.firstLineHeadIndent, points)
-            textView.stepRichTextParagraphStyleValue(\.headIndent, points)
-        case .stepLineSpacing(let points): textView.stepRichTextParagraphStyleValue(\.lineSpacing, points)
-        case .stepSuperscript(let points): textView.stepRichTextSuperscriptLevel(points: points)
         case .toggleStyle(let style): textView.toggleRichTextStyle(style)
         case .undoLatestChange:
             textView.undoLatestChange()
@@ -66,38 +56,6 @@ extension RichTextCoordinator {
     func setAttributedString(to newValue: NSAttributedString?) {
         guard let newValue else { return }
         textView.setRichText(newValue)
-    }
-
-    // TODO: This code should be handled by the component
-    func setColor(_ color: RichTextColor, to val: ColorRepresentable) {
-        var applyRange: NSRange?
-        if textView.hasSelectedRange {
-            applyRange = textView.selectedRange
-        }
-        guard let attribute = color.attribute else { return }
-        if let applyRange {
-            textView.setRichTextColor(color, to: val, at: applyRange)
-        } else {
-            textView.setRichTextAttribute(attribute, to: val)
-        }
-    }
-
-    func setHighlightedRange(to range: NSRange?) {
-        resetHighlightedRangeAppearance()
-        guard let range = range else { return }
-        setHighlightedRangeAppearance(for: range)
-    }
-
-    func setHighlightedRangeAppearance(for range: NSRange) {
-        let back = textView.richTextColor(.background, at: range) ?? .clear
-        let fore = textView.richTextColor(.foreground, at: range) ?? .textColor
-        highlightedRangeOriginalBackgroundColor = back
-        highlightedRangeOriginalForegroundColor = fore
-        let style = textView.highlightingStyle
-        let background = ColorRepresentable(style.backgroundColor)
-        let foreground = ColorRepresentable(style.foregroundColor)
-        textView.setRichTextColor(.background, to: background, at: range)
-        textView.setRichTextColor(.foreground, to: foreground, at: range)
     }
 
     func setIsEditable(to newValue: Bool) {

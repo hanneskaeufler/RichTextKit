@@ -64,9 +64,6 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the latest change can be undone.
     @Published public internal(set) var canUndoLatestChange = false
 
-    /// The current color values.
-    @Published public internal(set) var colors = [RichTextColor: ColorRepresentable]()
-
     /// The style to apply when highlighting a range.
     @Published public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
 
@@ -122,21 +119,9 @@ public extension RichTextContext {
 
 public extension RichTextContext {
 
-    /// Set ``highlightedRange`` to a new, optional range.
-    func highlightRange(_ range: NSRange?) {
-        actionPublisher.send(.setHighlightedRange(range))
-        highlightedRange = range
-    }
-
     /// Reset the attributed string.
     func resetAttributedString() {
         setAttributedString(to: "")
-    }
-
-    /// Reset the ``highlightedRange``.
-    func resetHighlightedRange() {
-        guard hasHighlightedRange else { return }
-        highlightedRange = nil
     }
 
     /// Reset the ``selectedRange``.

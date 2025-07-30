@@ -64,41 +64,6 @@ public extension Image {
     static let richTextUnknownValueType = symbol("questionmark")
 }
 
-public extension Image {
-
-    static func richTextStepFontSize(
-        _ points: Int
-    ) -> Image {
-        points < 0 ?
-            .richTextFontSizeDecrease :
-            .richTextFontSizeIncrease
-    }
-
-    static func richTextStepIndent(
-        _ points: Double
-    ) -> Image {
-        points < 0 ?
-            .richTextIndentDecrease :
-            .richTextIndentIncrease
-    }
-
-    static func richTextStepLineSpacing(
-        _ points: Double
-    ) -> Image {
-        points < 0 ?
-            .richTextLineSpacingDecrease :
-            .richTextLineSpacingIncrease
-    }
-
-    static func richTextStepSuperscript(
-        _ steps: Int
-    ) -> Image {
-        steps < 0 ?
-            .richTextSuperscriptDecrease :
-            .richTextSuperscriptIncrease
-    }
-}
-
 extension Image {
 
     static func symbol(_ name: String) -> Image {

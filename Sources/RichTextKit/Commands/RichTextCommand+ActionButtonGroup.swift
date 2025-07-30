@@ -43,49 +43,6 @@ public extension RichTextCommand {
 
 public extension RichTextCommand.ActionButtonGroup {
 
-    /// Create a button group with alignments.
-    init(
-        alignments: [NSTextAlignment],
-        additionalActions: [RichTextAction] = []
-    ) {
-        self.actions = alignments.map {
-            .setAlignment($0)
-        } + additionalActions
-    }
-
-    /// Create a button group with font size steppers.
-    init(
-        fontSize: Bool,
-        additionalActions: [RichTextAction] = []
-    ) {
-        self.actions = [
-            .stepFontSize(points: 1),
-            .stepFontSize(points: -1)
-        ] + additionalActions
-    }
-
-    /// Create a button group with indent steppers.
-    init(
-        indent: Bool,
-        additionalActions: [RichTextAction] = []
-    ) {
-        self.actions = [
-            .stepIndent(points: 30),
-            .stepIndent(points: -30)
-        ] + additionalActions
-    }
-
-    /// Create a button group with line spacing steppers.
-    init(
-        lineSpacing: Bool,
-        additionalActions: [RichTextAction] = []
-    ) {
-        self.actions = [
-            .stepLineSpacing(points: 1),
-            .stepLineSpacing(points: -1)
-        ] + additionalActions
-    }
-
     /// Create a button group with style toggles.
     init(
         styles: [RichTextStyle],
@@ -96,14 +53,4 @@ public extension RichTextCommand.ActionButtonGroup {
         } + additionalActions
     }
 
-    /// Create a button group with superscript steppers.
-    init(
-        superscript: Bool,
-        additionalActions: [RichTextAction] = []
-    ) {
-        self.actions = [
-            .stepSuperscript(steps: -1),
-            .stepSuperscript(steps: 1)
-        ] + additionalActions
-    }
 }

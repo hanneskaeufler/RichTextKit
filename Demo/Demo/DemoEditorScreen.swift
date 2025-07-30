@@ -51,7 +51,7 @@ struct DemoEditorScreen: View {
         .frame(minWidth: 500)
         .focusedValue(\.richTextContext, context)
         .toolbarRole(.automatic)
-        .richTextFormatToolbarConfig(.init(colorPickers: []))
+        .richTextFormatToolbarConfig(.init())
         .viewDebug()
         .onChange(of: document.text) { oldValue, newValue in
             print("FIRE")
@@ -62,15 +62,7 @@ struct DemoEditorScreen: View {
 private extension DemoEditorScreen {
 
     var isMac: Bool {
-        #if os(macOS)
         true
-        #else
-        false
-        #endif
-    }
-
-    var colorPickers: [RichTextColor] {
-        [.foreground, .background]
     }
 
     var formatToolbarEdge: VerticalEdge {

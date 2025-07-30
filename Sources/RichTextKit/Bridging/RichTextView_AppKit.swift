@@ -25,16 +25,8 @@ open class RichTextView: NSTextView, RichTextViewComponent {
     /// The configuration to use by the rich text view.
     public var configuration: Configuration = .standard
 
-    /// The theme for coloring and setting style to text view.
-    public var theme: Theme = .standard {
-        didSet { setup(theme) }
-    }
-
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
-
-    /// The image configuration to use by the rich text view.
-    var imageConfigurationWasSet = false
 
     open override func scrollWheel(with event: NSEvent) {
 
@@ -70,7 +62,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         allowsUndo = true
         layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
-        setup(theme)
     }
 
     // MARK: - Open Functionality

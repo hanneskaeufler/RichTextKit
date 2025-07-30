@@ -18,11 +18,4 @@ extension RichTextView {
         attributedString = text
         setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
-
-    func setup(_ theme: RichTextView.Theme) {
-        guard richText.string.isEmpty else { return }
-        font = theme.font
-        textColor = theme.fontColor
-        backgroundColor = theme.backgroundColor
-    }
 }

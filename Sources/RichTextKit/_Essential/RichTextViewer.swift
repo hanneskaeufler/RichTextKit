@@ -6,7 +6,6 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 /// This view can be used to display rich text without being
@@ -30,4 +29,3 @@ public struct RichTextViewer: View {
         RichTextEditor(text: .constant(text), context: context)
     }
 }
-#endif

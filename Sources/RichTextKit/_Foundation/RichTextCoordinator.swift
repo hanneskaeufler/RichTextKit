@@ -6,7 +6,6 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 import Combine
 import SwiftUI
 
@@ -61,39 +60,6 @@ open class RichTextCoordinator: NSObject {
 
     // MARK: - Internal Properties
 
-    /// The background color that was set before any current
-    /// highlighted range was set.
-    var highlightedRangeOriginalBackgroundColor: ColorRepresentable?
-
-
-    /// The foreground color that was set before any current
-    /// highlighted range was set.
-     var highlightedRangeOriginalForegroundColor: ColorRepresentable?
-
-    #if canImport(UIKit)
-
-    // MARK: - UITextViewDelegate
-
-    open func textViewDidBeginEditing(_ textView: UITextView) {
-        context.isEditingText = true
-    }
-
-    open func textViewDidChange(_ textView: UITextView) {
-        syncWithTextView()
-    }
-
-    open func textViewDidChangeSelection(_ textView: UITextView) {
-        syncWithTextView()
-    }
-
-    open func textViewDidEndEditing(_ textView: UITextView) {
-        syncWithTextView()
-        context.isEditingText = false
-    }
-    #endif
-
-    #if canImport(AppKit) && !targetEnvironment(macCatalyst)
-
     // MARK: - NSTextViewDelegate
 
     open func textDidBeginEditing(_ notification: Notification) {
@@ -112,35 +78,11 @@ open class RichTextCoordinator: NSObject {
     open func textDidEndEditing(_ notification: Notification) {
         context.isEditingText = false
     }
-    #endif
 }
 
-#if iOS || os(tvOS) || os(visionOS)
-import UIKit
-
-extension RichTextCoordinator: UITextViewDelegate {}
-
-#elseif macOS
 import AppKit
 
 extension RichTextCoordinator: NSTextViewDelegate {}
-#endif
-
-// MARK: - Public Extensions
-
-public extension RichTextCoordinator {
-
-    /// Reset appearance for the currently highlighted range.
-    func resetHighlightedRangeAppearance() {
-        guard
-            let range = context.highlightedRange,
-            let background = highlightedRangeOriginalBackgroundColor,
-            let foreground = highlightedRangeOriginalForegroundColor
-        else { return }
-        textView.setRichTextColor(.background, to: background, at: range)
-        textView.setRichTextColor(.foreground, to: foreground, at: range)
-    }
-}
 
 // MARK: - Internal Extensions
 
@@ -178,12 +120,6 @@ extension RichTextCoordinator {
         sync(&context.isEditingText, with: textView.isFirstResponder)
         sync(&context.paragraphStyle, with: textView.richTextParagraphStyle ?? .defaultMutable)
 
-        RichTextColor.allCases.forEach {
-            if let color = textView.richTextColor($0) {
-                context.setColor($0, to: color)
-            }
-        }
-
         let styles = textView.richTextStyles
         RichTextStyle.all.forEach {
             let style = styles.hasStyle($0)
@@ -212,11 +148,9 @@ extension RichTextCoordinator {
     /// the information will show correctly, but as you type,
     /// the last selected font, colors etc. will be used.
     func updateTextViewAttributesIfNeeded() {
-        #if macOS
         if textView.hasSelectedRange { return }
         let attributes = textView.richTextAttributes
         textView.setRichTextAttributes(attributes)
-        #endif
     }
 
     /**
@@ -225,11 +159,8 @@ extension RichTextCoordinator {
      So that the current attributes will set again for updated location.
      */
     func replaceCurrentAttributesIfNeeded() {
-        #if macOS
         if textView.hasSelectedRange { return }
         let attributes = textView.richTextAttributes
         textView.setNewRichTextAttributes(attributes)
-        #endif
     }
 }
-#endif

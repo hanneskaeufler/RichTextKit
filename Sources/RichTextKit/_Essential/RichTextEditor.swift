@@ -85,9 +85,6 @@ public struct RichTextEditor: ViewRepresentable {
     @Environment(\.richTextEditorConfig)
     private var config
 
-    @Environment(\.richTextEditorStyle)
-    private var style
-
     public let scrollView = RichTextView.scrollableTextView()
 
     public var textView: RichTextView {
@@ -106,7 +103,6 @@ public struct RichTextEditor: ViewRepresentable {
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue, format: format)
         textView.configuration = config
-        textView.theme = style
         viewConfiguration(textView)
         return scrollView
     }
