@@ -26,7 +26,6 @@ extension RichTextCoordinator {
         subscribeToContextFontSize()
         subscribeToContextParagraphStyle()
         subscribeToContextIsEditable()
-        subscribeToContextIsEditingText()
     }
 }
 
@@ -62,12 +61,6 @@ private extension RichTextCoordinator {
     func subscribeToContextIsEditable() {
         subscribe(to: context.$isEditable) { [weak self] in
             self?.setIsEditable(to: $0)
-        }
-    }
-
-    func subscribeToContextIsEditingText() {
-        subscribe(to: context.$isEditingText) { [weak self] in
-            self?.setIsEditing(to: $0)
         }
     }
 }
