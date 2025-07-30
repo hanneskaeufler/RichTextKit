@@ -18,15 +18,11 @@ public extension View {
      */
     @ViewBuilder
     func keyboardShortcut(for style: RichTextStyle) -> some View {
-        #if iOS || macOS || os(visionOS)
         switch style {
         case .bold: keyboardShortcut("b", modifiers: .command)
         case .italic: keyboardShortcut("i", modifiers: .command)
         case .strikethrough: self
         case .underlined: keyboardShortcut("u", modifiers: .command)
         }
-        #else
-        self
-        #endif
     }
 }

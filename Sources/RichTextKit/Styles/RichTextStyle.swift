@@ -102,22 +102,6 @@ public extension Collection where Element == RichTextStyle {
     }
 }
 
-#if canImport(UIKit)
-public extension RichTextStyle {
-
-    /// The symbolic font traits for the style, if any.
-    var symbolicTraits: UIFontDescriptor.SymbolicTraits? {
-        switch self {
-        case .bold: .traitBold
-        case .italic: .traitItalic
-        case .strikethrough: nil
-        case .underlined: nil
-        }
-    }
-}
-#endif
-
-#if macOS
 public extension RichTextStyle {
 
     /// The symbolic font traits for the trait, if any.
@@ -130,4 +114,3 @@ public extension RichTextStyle {
         }
     }
 }
-#endif

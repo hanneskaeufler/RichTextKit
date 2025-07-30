@@ -90,11 +90,6 @@ public protocol RichTextViewComponent: AnyObject,
 
 public extension RichTextViewComponent {
 
-    /// Show an alert with a title, message and OK button.
-    func alert(title: String, message: String) {
-        alert(title: title, message: message, buttonTitle: "OK")
-    }
-
     /// Delete all characters in a certain range.
     func deleteCharacters(in range: NSRange) {
         mutableAttributedString?.deleteCharacters(in: range)
