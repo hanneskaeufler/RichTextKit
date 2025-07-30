@@ -12,9 +12,7 @@ public extension RichTextContext {
 
     /// Handle a certain rich text action.
     func handle(_ action: RichTextAction) {
-        switch action {
-        default: actionPublisher.send(action)
-        }
+        actionPublisher.send(action)
     }
 
     /// Check if the context can handle a certain action.

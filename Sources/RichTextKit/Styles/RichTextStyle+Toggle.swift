@@ -62,11 +62,7 @@ public extension RichTextStyle {
         private let fillVertically: Bool
 
         public var body: some View {
-            #if os(tvOS) || os(watchOS)
-            toggle
-            #else
             toggle.toggleStyle(.button)
-            #endif
         }
 
         private var toggle: some View {

@@ -34,7 +34,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
      - Parameters:
        - text: The text to edit with the text view.
-       - format: The rich text format to edit.
      */
     open func setup(
         with text: NSAttributedString,

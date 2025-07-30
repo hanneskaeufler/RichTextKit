@@ -20,22 +20,6 @@ import SwiftUI
  the `text` binding will not yet update the editor. Until it
  is fixed, use `setAttributedString(to:)`.
 
- Since the view wraps a native `UIKit` or `AppKit` text view,
- you can't apply `.toolbar` modifiers to it, like you can do
- with other SwiftUI views. This means that this doesn't work:
-
- ```swift
- RichTextEditor(text: $text, context: context)
-     .toolbar {
-         ToolbarItemGroup(placement: .keyboard) {
-             ....
-         }
-     }
- ```
-
- This will not show anything. To work around this limitation,
- use a ``RichTextKeyboardToolbar`` instead.
-
  You can configure and style the view by applying its config
  and style view modifiers to your view hierarchy:
 
@@ -44,8 +28,6 @@ import SwiftUI
     RichTextEditor(...)
     ...
  }
- .richTextEditorStyle(...)
- .richTextEditorConfig(...)
  ```
 
  For more information, see ``RichTextKeyboardToolbarConfig``

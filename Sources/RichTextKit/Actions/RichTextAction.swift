@@ -127,19 +127,3 @@ public extension RichTextAction {
     /// A name alias for `.undoLatestChange`.
     static var undo: RichTextAction { .undoLatestChange }
 }
-
-public extension CGFloat {
-
-    /// The default rich text indent step size.
-    static var defaultRichTextIntentStepSize: CGFloat {
-        30.0
-    }
-}
-
-public extension UInt {
-
-    /// The default rich text indent step size.
-    static var defaultRichTextIntentStepSize: UInt {
-        30
-    }
-}
