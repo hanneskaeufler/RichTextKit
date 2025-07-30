@@ -80,7 +80,6 @@ private extension RichTextAction.Button {
                 Group {
                     HStack {
                         button(for: .copy)
-                        button(for: .dismissKeyboard)
                         button(for: .redoLatestChange)
                         button(for: .undoLatestChange)
                     }

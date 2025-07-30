@@ -6,7 +6,6 @@
 //  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 /// This struct can configure a ``RichTextKeyboardToolbar``.
@@ -23,7 +22,7 @@ public struct RichTextKeyboardToolbarConfig {
         alwaysDisplayToolbar: Bool = false,
         displayFormatSheetButton: Bool = true,
         leadingActions: [RichTextAction] = [.undo, .redo],
-        trailingActions: [RichTextAction] = [.dismissKeyboard]) {
+        trailingActions: [RichTextAction] = []) {
         self.alwaysDisplayToolbar = alwaysDisplayToolbar
         self.displayFormatSheetButton = displayFormatSheetButton
         self.leadingActions = leadingActions
@@ -77,4 +76,3 @@ public extension EnvironmentValues {
         set { self [RichTextKeyboardToolbarConfig.Key.self] = newValue }
     }
 }
-#endif

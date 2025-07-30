@@ -34,10 +34,8 @@ public extension View {
     /// the view.
     @ViewBuilder
     func keyboardShortcut(for action: RichTextAction) -> some View {
-        #if iOS || macOS || os(visionOS)
         switch action {
         case .copy: self.keyboardShortcut("c", modifiers: .command)
-        case .dismissKeyboard: self
         case .redoLatestChange: self.keyboardShortcut("z", modifiers: [.command, .shift])
         case .setAlignment(let align): self.keyboardShortcut(for: align)
         case .stepFontSize(let points): self.keyboardShortcut(points < 0 ? "-" : "+", modifiers: .command)
@@ -47,8 +45,5 @@ public extension View {
         case .undoLatestChange: self.keyboardShortcut("z", modifiers: .command)
         default: self // TODO: Probably not defined, object to discuss.
         }
-        #else
-        self
-        #endif
     }
 }

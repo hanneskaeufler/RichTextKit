@@ -32,7 +32,6 @@ final class RichTextCoordinator_SubscriptionsTests: XCTestCase {
             textView: textView,
             richTextContext: textContext)
         textView.selectedRange = NSRange(location: 0, length: 1)
-        textView.setRichTextAlignment(.justified)
     }
 
     override func tearDown() {

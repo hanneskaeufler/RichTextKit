@@ -17,7 +17,6 @@ extension RichTextCoordinator {
         case .copy: textView.copySelection()
         case .deleteSelectedText: textView.deleteText(in: textView.selectedRange)
         case .deleteText(let range): textView.deleteText(in: range)
-        case .dismissKeyboard: textView.resignFirstResponder()
         case .pasteText(let text): pasteText(text)
         case .redoLatestChange:
             textView.redoLatestChange()
