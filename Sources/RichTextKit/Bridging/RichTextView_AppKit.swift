@@ -22,25 +22,11 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
 
-    /// The configuration to use by the rich text view.
-    public var configuration: Configuration = .standard
-
     /// The style to use when highlighting text in the view.
     public var highlightingStyle: RichTextHighlightingStyle = .standard
 
     open override func scrollWheel(with event: NSEvent) {
-
-        if configuration.isScrollingEnabled {
-            return super.scrollWheel(with: event)
-        }
-
-        // 1st nextResponder is NSClipView
-        // 2nd nextResponder is NSScrollView
-        // 3rd nextResponder is NSResponder SwiftUIPlatformViewHost
-        self.nextResponder?
-            .nextResponder?
-            .nextResponder?
-            .scrollWheel(with: event)
+        return super.scrollWheel(with: event)
     }
 
     // MARK: - Setup
@@ -59,7 +45,7 @@ open class RichTextView: NSTextView, RichTextViewComponent {
         setupSharedBehavior(with: text)
         allowsImageEditing = false
         allowsUndo = true
-        isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
+        isContinuousSpellCheckingEnabled = true
     }
 
     // MARK: - Open Functionality
@@ -160,15 +146,5 @@ public extension RichTextView {
     // Get the rich text that is managed by the view.
     var mutableAttributedString: NSMutableAttributedString? {
         textStorage
-    }
-}
-
-// MARK: - Additional Pasteboard Types
-
-public extension RichTextView {
-    override var readablePasteboardTypes: [NSPasteboard.PasteboardType] {
-        var pasteboardTypes = super.readablePasteboardTypes
-        pasteboardTypes.append(.png)
-        return pasteboardTypes
     }
 }

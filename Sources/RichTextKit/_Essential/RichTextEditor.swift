@@ -79,13 +79,10 @@ public struct RichTextEditor: ViewRepresentable {
     private var text: Binding<NSAttributedString>
     private var viewConfiguration: ViewConfiguration
 
-    @Environment(\.richTextEditorConfig)
-    private var config
-
     public let scrollView = RichTextView.scrollableTextView()
 
     public var textView: RichTextView {
-        scrollView.hasVerticalScroller = config.isScrollBarsVisible
+        scrollView.hasVerticalScroller = true
         return scrollView.documentView as? RichTextView ?? RichTextView()
     }
 
@@ -99,7 +96,6 @@ public struct RichTextEditor: ViewRepresentable {
 
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue)
-        textView.configuration = config
         viewConfiguration(textView)
         return scrollView
     }
