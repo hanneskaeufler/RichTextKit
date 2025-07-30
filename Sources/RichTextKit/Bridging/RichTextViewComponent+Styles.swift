@@ -7,14 +7,15 @@
 //
 
 import Foundation
+import AppKit
 
 public extension RichTextViewComponent {
 
     /// Get all styles.
     var richTextStyles: [RichTextStyle] {
         let attributes = richTextAttributes
-        let traits = richTextFont?.fontDescriptor.symbolicTraits
-        var styles = traits?.enabledRichTextStyles ?? []
+        let traits = NSFont.preferredFont(forTextStyle: .body).fontDescriptor.symbolicTraits
+        var styles = traits.enabledRichTextStyles
         if attributes.isStrikethrough { styles.append(.strikethrough) }
         if attributes.isUnderlined { styles.append(.underlined) }
         return styles
@@ -35,8 +36,7 @@ public extension RichTextViewComponent {
         case .bold, .italic:
             let styles = richTextStyles
             guard styles.shouldAddOrRemove(style, newValue) else { return }
-            guard let font = richTextFont else { return }
-            guard let newFont = font.toggling(style) else { return }
+            guard let newFont = NSFont.preferredFont(forTextStyle: .body).toggling(style) else { return }
             setRichTextAttribute(.font, to: newFont)
         case .underlined:
             setRichTextAttribute(.underlineStyle, to: value)

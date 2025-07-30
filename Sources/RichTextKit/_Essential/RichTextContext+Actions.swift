@@ -30,7 +30,6 @@ public extension RichTextContext {
         case .selectRange: true
         case .setAttributedString: true
         case .setHighlightingStyle: true
-        case .setParagraphStyle: true
         case .setStyle: true
         case .toggleStyle: true
         case .undoLatestChange: canUndoLatestChange

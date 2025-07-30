@@ -21,7 +21,6 @@ extension RichTextCoordinator {
         }
         .store(in: &cancellables)
 
-        subscribeToContextParagraphStyle()
         subscribeToContextIsEditable()
     }
 }
@@ -35,12 +34,6 @@ private extension RichTextCoordinator {
         publisher
             .sink(receiveValue: action)
             .store(in: &cancellables)
-    }
-
-    func subscribeToContextParagraphStyle() {
-        subscribe(to: context.$paragraphStyle) { [weak self] in
-            self?.handle(.setParagraphStyle($0))
-        }
     }
 
     func subscribeToContextIsEditable() {

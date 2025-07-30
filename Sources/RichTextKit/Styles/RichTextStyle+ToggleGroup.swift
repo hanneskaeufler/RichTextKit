@@ -6,7 +6,6 @@
 //  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 public extension RichTextStyle {
@@ -47,18 +46,13 @@ public extension RichTextStyle {
         private var groupWidth: CGFloat? {
             if isGreedy { return nil }
             let count = Double(styles.count)
-            #if macOS
             return 30 * count
-            #else
-            return 50 * count
-            #endif
         }
 
         @ObservedObject
         private var context: RichTextContext
 
         public var body: some View {
-            #if macOS
             ControlGroup {
                 ForEach(styles) {
                     RichTextStyle.Toggle(
@@ -69,12 +63,6 @@ public extension RichTextStyle {
                 }
             }
             .frame(width: groupWidth)
-            #else
-            RichTextStyle.ToggleStack(
-                context: context,
-                styles: styles
-            )
-            #endif
         }
     }
 }
@@ -105,4 +93,3 @@ public extension RichTextStyle {
 
     return Preview()
 }
-#endif

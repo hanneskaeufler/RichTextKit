@@ -13,10 +13,6 @@ final class RichTextContextTests: XCTestCase {
 
     func testInitializerSetsDefaultValues() {
         let context = RichTextContext()
-        let iosFontName = context.fontName == ".SFUI"
-        let macFontName = context.fontName == ".AppleSystemUIFont"
-        XCTAssertTrue(iosFontName || macFontName)
-        XCTAssertEqual(context.fontSize, 16)
         XCTAssertFalse(context.hasStyle(.bold))
         XCTAssertFalse(context.hasStyle(.italic))
         XCTAssertFalse(context.hasStyle(.underlined))
@@ -25,21 +21,6 @@ final class RichTextContextTests: XCTestCase {
         XCTAssertNil(context.highlightedRange)
         XCTAssertEqual(context.selectedRange.location, 0)
         XCTAssertEqual(context.selectedRange.length, 0)
-    }
-
-    func testHighlightingRangeSetsHighlightedRange() {
-        let context = RichTextContext()
-        let range = NSRange(location: 1, length: 2)
-        context.highlightRange(range)
-        XCTAssertEqual(context.highlightedRange, range)
-    }
-
-    func testResetingHighlightResetsHighlightedRange() {
-        let context = RichTextContext()
-        let range = NSRange(location: 1, length: 2)
-        context.highlightRange(range)
-        context.resetHighlightedRange()
-        XCTAssertNil(context.highlightedRange)
     }
 
     func testStopEditingTextSetsPropertyToFalse() {

@@ -67,33 +67,8 @@ public class RichTextContext: ObservableObject {
     /// The style to apply when highlighting a range.
     @Published public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
 
-    /// The current paragraph style.
-    @Published public internal(set) var paragraphStyle = NSMutableParagraphStyle.defaultMutable
-
     /// The current rich text styles.
     @Published public internal(set) var styles = [RichTextStyle: Bool]()
-
-
-    // MARK: - Paragraph
-
-    /// A paragraph style value for a certain value type.
-    public func paragraphStyleValue<ValueType>(
-        for keyPath: KeyPath<NSParagraphStyle, ValueType>
-    ) -> ValueType {
-        paragraphStyle[keyPath: keyPath]
-    }
-
-    /// A binding that binds to paragraph style values.
-    public func paragraphStyleValueBinding<ValueType>(
-        for keyPath: WritableKeyPath<NSMutableParagraphStyle, ValueType>
-    ) -> Binding<ValueType> {
-        .init {
-            self.paragraphStyle[keyPath: keyPath]
-        } set: { value in
-            self.paragraphStyle[keyPath: keyPath] = value
-        }
-    }
-
 
     // MARK: - Properties
 

@@ -10,11 +10,7 @@
 import UIKit
 #endif
 
-#if macOS
 import AppKit
-#endif
-
-#if iOS || macOS || os(tvOS)
 import RichTextKit
 import XCTest
 
@@ -31,7 +27,6 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
         textView = RichTextView()
         textView.setup(
             with: NSAttributedString(string: "foo bar baz"),
-            format: .rtf
         )
     }
 
@@ -44,9 +39,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testBoldWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setRichTextStyle(.bold, to: true)
-        #if macOS // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.richTextStyles.hasStyle(.bold))
-        #endif
         textView.setSelectedRange(noRange)
         XCTAssertFalse(textView.richTextStyles.hasStyle(.bold))
     }
@@ -54,9 +47,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testItalicWorksForSelectedRange() {
         textView.setSelectedRange(selectedRange)
         textView.setRichTextStyle(.italic, to: true)
-        #if macOS // TODO: Why did this stop working for iOS and tvOS
         XCTAssertTrue(textView.richTextStyles.hasStyle(.italic))
-        #endif
         textView.setSelectedRange(noRange)
         XCTAssertFalse(textView.richTextStyles.hasStyle(.italic))
     }
@@ -72,11 +63,7 @@ final class RichTextViewComponent_StylesTests: XCTestCase {
     func testUnderlinedWorksForNoSelectedRange() {
         textView.setSelectedRange(noRange)
         textView.setRichTextStyle(.underlined, to: true)
-        #if iOS || os(tvOS)
-        XCTAssertTrue(textView.richTextStyles.hasStyle(.underlined))
-        #endif
         textView.setSelectedRange(selectedRange)
         XCTAssertFalse(textView.richTextStyles.hasStyle(.underlined))
     }
 }
-#endif

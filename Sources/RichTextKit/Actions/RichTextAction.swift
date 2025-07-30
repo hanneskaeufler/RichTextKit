@@ -49,9 +49,6 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
 
-    /// Set the current paragraph style.
-    case setParagraphStyle(_ style: NSMutableParagraphStyle)
-
     /// Toggle a certain style.
     case toggleStyle(_ style: RichTextStyle)
 
@@ -79,7 +76,6 @@ public extension RichTextAction {
         case .selectRange: .richTextSelection
         case .setAttributedString: .richTextDocument
         case .setHighlightingStyle: .richTextAlignmentCenter
-        case .setParagraphStyle: .richTextAlignmentLeft
         case .setStyle(let style, _): style.icon
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextUndo
@@ -119,7 +115,6 @@ public extension RichTextAction {
         case .selectRange: .selectRange
         case .setAttributedString: .setAttributedString
         case .setHighlightingStyle: .highlightingStyle
-        case .setParagraphStyle: .textAlignmentLeft
         case .setStyle(let style, _): style.titleKey
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange

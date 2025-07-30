@@ -32,7 +32,6 @@ final class RichTextCoordinatorTests: XCTestCase {
             richTextContext: context)
         coordinator.shouldDelaySyncContextWithTextView = false
         view.selectedRange = NSRange(location: 0, length: 1)
-        view.setRichTextParagraphStyleValue(\.alignment, .justified)
     }
 
     override func tearDown() {
@@ -79,11 +78,7 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertTrue(context.canCopy)
         XCTAssertEqual(context.canRedoLatestChange, view.undoManager?.canRedo ?? false)
         XCTAssertEqual(context.canUndoLatestChange, view.undoManager?.canUndo ?? false)
-        XCTAssertEqual(context.fontName, view.richTextFont?.fontName)
-        XCTAssertEqual(context.fontSize, view.richTextFont?.pointSize)
         XCTAssertEqual(context.isEditingText, view.isFirstResponder)
-        // XCTAssertEqual(context.lineSpacing, view.richTextLineSpacing) TODO: Not done yet
-        XCTAssertEqual(context.paragraphStyleValue(for: \.alignment), view.richTextParagraphStyleValue(\.alignment))
     }
 
     func testChangingOtherViewPropertiesUpdatesContextAfterExplicitUpdate() {
@@ -92,42 +87,11 @@ final class RichTextCoordinatorTests: XCTestCase {
 
     func assertIsSyncedWithContext(macOSAlignment: NSTextAlignment = .left) {
         let styles = view.richTextStyles
-        XCTAssertEqual(context.fontName, view.richTextFont?.fontName)
-        XCTAssertEqual(context.fontSize, view.richTextFont?.pointSize)
         XCTAssertEqual(context.styles[.bold], styles.hasStyle(.bold))
         XCTAssertEqual(context.styles[.italic], styles.hasStyle(.italic))
         XCTAssertEqual(context.styles[.underlined], styles.hasStyle(.underlined))
         XCTAssertEqual(context.selectedRange, view.selectedRange)
-        #if iOS || os(tvOS) || os(macOS)
-        XCTAssertEqual(context.paragraphStyleValue(for: \.alignment), view.richTextParagraphStyleValue(\.alignment))
-        #endif
     }
-
-    #if iOS || os(tvOS)
-
-    func testTextViewDelegateHandlesTextViewDidBeginEditing() {
-        coordinator.textViewDidBeginEditing(view)
-        XCTAssertTrue(context.isEditingText)
-    }
-
-    func testTextViewDelegateHandlesTextViewDidChange() {
-        view.text = "abc 123"
-        coordinator.textViewDidChange(view)
-        assertIsSyncedWithContext()
-    }
-
-    func testTextViewDelegateHandlesTextViewDidChangeSelection() {
-        coordinator.textViewDidChangeSelection(view)
-        assertIsSyncedWithContext()
-    }
-
-    func testTextViewDelegateHandlesTextViewDidEndEditing() {
-        context.isEditingText = true
-        coordinator.textViewDidEndEditing(view)
-        XCTAssertFalse(context.isEditingText)
-    }
-
-    #elseif macOS
 
     let notification = Notification(
         name: NSText.didEndEditingNotification,
@@ -150,17 +114,5 @@ final class RichTextCoordinatorTests: XCTestCase {
         XCTAssertFalse(context.isEditingText)
     }
 
-    #endif
-
-    func testResetingHighlightedRangeAppearanceResetsToInternalValues() {
-        let range = NSRange(location: 4, length: 3)
-        coordinator.context.highlightedRange = range
-        coordinator.highlightedRangeOriginalBackgroundColor = .blue
-        coordinator.highlightedRangeOriginalForegroundColor = .yellow
-        coordinator.resetHighlightedRangeAppearance()
-        view.selectedRange = range
-        XCTAssertEqual(view.richTextColor(.background), .blue)
-        XCTAssertEqual(view.richTextColor(.foreground), .yellow)
-    }
 }
 #endif

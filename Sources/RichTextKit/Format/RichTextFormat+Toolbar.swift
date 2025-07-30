@@ -71,17 +71,6 @@ public extension RichTextFormat {
 
 private extension RichTextFormat.Toolbar {
 
-    var useSingleLine: Bool {
-        #if macOS
-        true
-        #else
-        horizontalSizeClass == .regular
-        #endif
-    }
-}
-
-private extension RichTextFormat.Toolbar {
-
     var background: some View {
         Color.clear
             .overlay(Color.primary.opacity(0.1))
@@ -91,29 +80,16 @@ private extension RichTextFormat.Toolbar {
 
     @ViewBuilder
     var controls: some View {
-        if useSingleLine {
             HStack {
                 controlsContent
             }
             .padding(.horizontal, style.padding)
-        } else {
-            VStack(spacing: style.spacing) {
-                controlsContent
-            }
-            .padding(.horizontal, style.padding)
-        }
     }
 
     @ViewBuilder
     var controlsContent: some View {
         HStack {
             styleToggleGroup(for: context)
-            if !useSingleLine {
-                Spacer()
-            }
-            if horizontalSizeClass == .regular {
-                Spacer()
-            }
         }
     }
 }

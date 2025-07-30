@@ -6,7 +6,6 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 /// This struct be used to configure a ``RichTextEditor``.
@@ -40,4 +39,3 @@ public extension EnvironmentValues {
         set { self [RichTextEditorConfig.Key.self] = newValue }
     }
 }
-#endif

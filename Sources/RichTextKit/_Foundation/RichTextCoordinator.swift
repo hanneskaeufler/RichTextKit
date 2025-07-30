@@ -118,7 +118,6 @@ extension RichTextCoordinator {
         sync(&context.canRedoLatestChange, with: textView.undoManager?.canRedo ?? false)
         sync(&context.canUndoLatestChange, with: textView.undoManager?.canUndo ?? false)
         sync(&context.isEditingText, with: textView.isFirstResponder)
-        sync(&context.paragraphStyle, with: textView.richTextParagraphStyle ?? .defaultMutable)
 
         let styles = textView.richTextStyles
         RichTextStyle.all.forEach {
