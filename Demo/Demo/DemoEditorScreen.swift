@@ -11,7 +11,7 @@ import SwiftUI
 
 struct DemoEditorScreen: View {
 
-    @Binding var document: DemoDocument
+    @State var document: NSAttributedString = .empty
 
     @State private var isInspectorPresented = false
 
@@ -19,25 +19,13 @@ struct DemoEditorScreen: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            #if os(macOS)
             RichTextFormat.Toolbar(context: context)
-            #endif
             RichTextEditor(
-                text: $document.text,
+                text: $document,
                 context: context
             ) {
                 $0.textContentInset = CGSize(width: 30, height: 30)
             }
-            // Use this to just view the text:
-            // RichTextViewer(document.text)
-            #if os(iOS)
-            RichTextKeyboardToolbar(
-                context: context,
-                leadingButtons: { $0 },
-                trailingButtons: { $0 },
-                formatSheet: { $0 }
-            )
-            #endif
         }
         .toolbar {
             ToolbarItem(placement: .automatic) {
@@ -53,7 +41,7 @@ struct DemoEditorScreen: View {
         .toolbarRole(.automatic)
         .richTextFormatToolbarConfig(.init())
         .viewDebug()
-        .onChange(of: document.text) { oldValue, newValue in
+        .onChange(of: document) { oldValue, newValue in
             print("FIRE")
         }
     }
@@ -72,7 +60,6 @@ private extension DemoEditorScreen {
 
 #Preview {
     DemoEditorScreen(
-        document: .constant(DemoDocument()),
         context: .init()
     )
 }

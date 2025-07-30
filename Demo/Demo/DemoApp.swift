@@ -14,10 +14,8 @@ struct DemoApp: App {
 
     var body: some Scene {
 
-        DocumentGroup(newDocument: DemoDocument()) { file in
-            DemoEditorScreen(
-                document: file.$document
-            )
+        WindowGroup {
+            DemoEditorScreen()
         }
         .commands {
             SidebarCommands()

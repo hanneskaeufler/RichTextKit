@@ -57,9 +57,6 @@ public protocol RichTextViewComponent: AnyObject,
 
     // MARK: - Functions
 
-    /// Show an alert with a title, message and button text.
-    func alert(title: String, message: String, buttonTitle: String)
-
     /// Copy the current selection.
     func copySelection()
 

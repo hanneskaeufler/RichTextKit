@@ -18,7 +18,7 @@ struct DemoDocument: FileDocument {
 
     var text: NSAttributedString
 
-    static var readableContentTypes: [UTType] { [.archivedData] }
+    static var readableContentTypes: [UTType] { [] }
 
     init(
         configuration: ReadConfiguration
@@ -28,14 +28,12 @@ struct DemoDocument: FileDocument {
         else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        let text = try NSAttributedString(data: data, format: .archivedData)
-        self.text = text
+        self.text = NSAttributedString()
     }
 
     func fileWrapper(
         configuration: WriteConfiguration
     ) throws -> FileWrapper {
-        let data = try text.richTextData(for: .archivedData)
-        return .init(regularFileWithContents: data)
+        return .init(regularFileWithContents: Data())
     }
 }
