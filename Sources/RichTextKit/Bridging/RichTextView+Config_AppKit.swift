@@ -6,7 +6,6 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
-#if macOS
 import Foundation
 
 public extension RichTextView {
@@ -40,4 +39,3 @@ public extension RichTextView {
         public var isContinuousSpellCheckingEnabled: Bool
     }
 }
-#endif

@@ -7,10 +7,8 @@
 
 import Foundation
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 public extension RichTextView.Configuration {
 
     /// The standard rich text view configuration.
     static var standard: Self { .init() }
 }
-#endif

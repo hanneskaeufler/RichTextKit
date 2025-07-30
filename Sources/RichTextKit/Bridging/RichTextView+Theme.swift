@@ -5,7 +5,6 @@
 //  Created by Dominik Bucher on 13.02.2024.
 //
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 public extension RichTextView {
@@ -40,4 +39,3 @@ public extension RichTextView.Theme {
     /// The standard rich text view theme.
     static var standard: Self { .init() }
 }
-#endif

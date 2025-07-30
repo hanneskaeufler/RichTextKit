@@ -8,13 +8,7 @@
 
 import Foundation
 
-#if canImport(UIKit)
-import UIKit
-#endif
-
-#if canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
-#endif
 
 public extension RichTextViewComponent {
 

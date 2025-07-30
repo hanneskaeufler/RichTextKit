@@ -6,7 +6,6 @@
 //  Copyright © 2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 extension RichTextView {
@@ -27,4 +26,3 @@ extension RichTextView {
         backgroundColor = theme.backgroundColor
     }
 }
-#endif

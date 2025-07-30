@@ -111,18 +111,6 @@ public class RichTextContext: ObservableObject {
 
     /// The currently highlighted range, if any.
     public var highlightedRange: NSRange?
-
-
-    // MARK: - Deprecated
-
-    @available(*, deprecated, message: "Use paragraphStyle instead.")
-    @Published public var lineSpacing: CGFloat = 10.0
-
-    @available(*, deprecated, message: "Use paragraphStyle instead.")
-    public var textAlignment: RichTextAlignment {
-        get { .init(paragraphStyleValue(for: \.alignment)) }
-        set { paragraphStyle[keyPath: \.alignment] = newValue.nativeAlignment }
-    }
 }
 
 public extension RichTextContext {

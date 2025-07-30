@@ -63,7 +63,7 @@ import SwiftUI
  For more information, see ``RichTextKeyboardToolbarConfig``
  and ``RichTextKeyboardToolbarStyle``.
  */
-public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View, FormatSheet: View>: View {
+public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: View>: View {
 
     /**
      Create a rich text keyboard toolbar.
@@ -72,27 +72,22 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
        - context: The context to affect.
        - leadingButtons: The leading buttons to place after the leading actions.
        - trailingButtons: The trailing buttons to place before the trailing actions.
-       - formatSheet: The rich text format sheet to use, by default ``RichTextFormat/Sheet``.
      */
     public init(
         context: RichTextContext,
         @ViewBuilder leadingButtons: @escaping (StandardLeadingButtons) -> LeadingButtons,
         @ViewBuilder trailingButtons: @escaping (StandardTrailingButtons) -> TrailingButtons,
-        @ViewBuilder formatSheet: @escaping (StandardFormatSheet) -> FormatSheet
     ) {
         self._context = ObservedObject(wrappedValue: context)
         self.leadingButtons = leadingButtons
         self.trailingButtons = trailingButtons
-        self.formatSheet = formatSheet
     }
 
     public typealias StandardLeadingButtons = EmptyView
     public typealias StandardTrailingButtons = EmptyView
-    public typealias StandardFormatSheet = RichTextFormat.Sheet
 
     private let leadingButtons: (StandardLeadingButtons) -> LeadingButtons
     private let trailingButtons: (StandardTrailingButtons) -> TrailingButtons
-    private let formatSheet: (StandardFormatSheet) -> FormatSheet
 
     @ObservedObject
     private var context: RichTextContext
@@ -130,12 +125,6 @@ public struct RichTextKeyboardToolbar<LeadingButtons: View, TrailingButtons: Vie
         .opacity(shouldDisplayToolbar ? 1 : 0)
         .offset(y: shouldDisplayToolbar ? 0 : style.toolbarHeight)
         .frame(height: shouldDisplayToolbar ? nil : 0)
-        .sheet(isPresented: $isFormatSheetPresented) {
-            formatSheet(
-                .init(context: context)
-            )
-            .prefersMediumSize()
-        }
     }
 }
 
@@ -267,7 +256,6 @@ private extension RichTextKeyboardToolbar {
                     context: context,
                     leadingButtons: { _ in Color.red },
                     trailingButtons: { _ in Color.green},
-                    formatSheet: { $0 }
                 )
             }
             .richTextKeyboardToolbarConfig(.init(

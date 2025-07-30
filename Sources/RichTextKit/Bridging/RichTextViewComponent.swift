@@ -9,11 +9,7 @@
 import CoreGraphics
 import Foundation
 
-#if canImport(UIKit)
-import UIKit
-#elseif canImport(AppKit) && !targetEnvironment(macCatalyst)
 import AppKit
-#endif
 
 /// This is a shared protocol for all ``RichTextView`` types.
 ///

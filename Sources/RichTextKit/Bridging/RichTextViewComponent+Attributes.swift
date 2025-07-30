@@ -16,13 +16,9 @@ public extension RichTextViewComponent {
             return richTextAttributes(at: selectedRange)
         }
 
-        #if macOS
         let range = NSRange(location: selectedRange.location - 1, length: 1)
         let safeRange = safeRange(for: range)
         return richTextAttributes(at: safeRange)
-        #else
-        return typingAttributes
-        #endif
     }
 
     /// Get a certain attribute.

@@ -50,16 +50,8 @@ public extension RichTextViewComponent {
     /// Set the rich text font size at current range.
     func setRichTextFontSize(_ size: CGFloat) {
         if size == richTextFont?.pointSize { return }
-        #if macOS
         setFontSize(size, at: selectedRange)
         setFontSizeAtCurrentPosition(size)
-        #else
-        if hasSelectedRange {
-            setFontSize(size, at: selectedRange)
-        } else {
-            setFontSizeAtCurrentPosition(size)
-        }
-        #endif
     }
 
     /// Step the rich text font size at current range.
@@ -128,10 +120,6 @@ private extension RichTextAttributeWriter {
 
     /// We must adjust empty font names on some platforms.
     func settableFontName(for fontName: String) -> String {
-        #if macOS
         fontName
-        #else
-        fontName
-        #endif
     }
 }

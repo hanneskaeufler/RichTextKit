@@ -6,7 +6,6 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 /**
@@ -89,18 +88,12 @@ public struct RichTextEditor: ViewRepresentable {
     @Environment(\.richTextEditorStyle)
     private var style
 
-    #if iOS || os(tvOS) || os(visionOS)
-    public let textView = RichTextView()
-    #endif
-
-    #if macOS
     public let scrollView = RichTextView.scrollableTextView()
 
     public var textView: RichTextView {
         scrollView.hasVerticalScroller = config.isScrollBarsVisible
         return scrollView.documentView as? RichTextView ?? RichTextView()
     }
-    #endif
 
     public func makeCoordinator() -> RichTextCoordinator {
         RichTextCoordinator(
@@ -109,19 +102,6 @@ public struct RichTextEditor: ViewRepresentable {
             richTextContext: context
         )
     }
-
-    #if iOS || os(tvOS) || os(visionOS)
-    public func makeUIView(context: Context) -> some UIView {
-        textView.setup(with: text.wrappedValue, format: format)
-        textView.configuration = config
-        textView.theme = style
-        viewConfiguration(textView)
-        return textView
-    }
-
-    public func updateUIView(_ view: UIViewType, context: Context) {}
-
-    #else
 
     public func makeNSView(context: Context) -> some NSView {
         textView.setup(with: text.wrappedValue, format: format)
@@ -132,7 +112,6 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public func updateNSView(_ view: NSViewType, context: Context) {}
-    #endif
 }
 
 // MARK: RichTextPresenter
@@ -164,4 +143,3 @@ public extension RichTextEditor {
         textView.mutableAttributedString
     }
 }
-#endif

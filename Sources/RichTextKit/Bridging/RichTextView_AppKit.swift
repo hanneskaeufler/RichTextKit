@@ -6,7 +6,6 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if macOS
 import AppKit
 
 /// This is a platform-agnostic text view for both UIKit and
@@ -184,5 +183,3 @@ public extension RichTextView {
         return pasteboardTypes
     }
 }
-
-#endif
