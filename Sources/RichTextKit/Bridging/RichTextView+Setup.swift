@@ -9,17 +9,15 @@
 import SwiftUI
 
 extension RichTextView {
+    fileprivate static let defaultFont = FontRepresentable.preferredFont(forTextStyle: .body)
 
     func setupSharedBehavior(
         with text: NSAttributedString,
     ) {
-        attributedString = .empty
-        
         // If the text has no font attributes, add a default font
-        let defaultFont = FontRepresentable.systemFont(ofSize: 16)
         if text.length > 0 && text.attribute(.font, at: 0, effectiveRange: nil) == nil {
             let mutableText = NSMutableAttributedString(attributedString: text)
-            mutableText.addAttribute(.font, value: defaultFont, range: NSRange(location: 0, length: text.length))
+            mutableText.addAttribute(.font, value: Self.defaultFont, range: NSRange(location: 0, length: text.length))
             attributedString = mutableText
         } else {
             attributedString = text
@@ -29,7 +27,7 @@ extension RichTextView {
         
         // Ensure we have default typing attributes including a font
         if typingAttributes[.font] == nil {
-            typingAttributes[.font] = defaultFont
+            typingAttributes[.font] = Self.defaultFont
         }
     }
 }
