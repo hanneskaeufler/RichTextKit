@@ -55,12 +55,10 @@ open class RichTextView: NSTextView, RichTextViewComponent {
      */
     open func setup(
         with text: NSAttributedString,
-        format: RichTextDataFormat
     ) {
-        setupSharedBehavior(with: text, format)
-        allowsImageEditing = true
+        setupSharedBehavior(with: text)
+        allowsImageEditing = false
         allowsUndo = true
-        layoutManager?.defaultAttachmentScaling = NSImageScaling.scaleProportionallyDown
         isContinuousSpellCheckingEnabled = configuration.isContinuousSpellCheckingEnabled
     }
 

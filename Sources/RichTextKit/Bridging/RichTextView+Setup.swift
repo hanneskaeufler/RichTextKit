@@ -12,7 +12,6 @@ extension RichTextView {
 
     func setupSharedBehavior(
         with text: NSAttributedString,
-        _ format: RichTextDataFormat
     ) {
         attributedString = .empty
         attributedString = text

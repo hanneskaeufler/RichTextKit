@@ -64,12 +64,10 @@ public struct RichTextEditor: ViewRepresentable {
     public init(
         text: Binding<NSAttributedString>,
         context: RichTextContext,
-        format: RichTextDataFormat = .archivedData,
         viewConfiguration: @escaping ViewConfiguration = { _ in }
     ) {
         self.text = text
         self._context = ObservedObject(wrappedValue: context)
-        self.format = format
         self.viewConfiguration = viewConfiguration
     }
 
@@ -79,7 +77,6 @@ public struct RichTextEditor: ViewRepresentable {
     private var context: RichTextContext
 
     private var text: Binding<NSAttributedString>
-    private var format: RichTextDataFormat
     private var viewConfiguration: ViewConfiguration
 
     @Environment(\.richTextEditorConfig)
@@ -101,7 +98,7 @@ public struct RichTextEditor: ViewRepresentable {
     }
 
     public func makeNSView(context: Context) -> some NSView {
-        textView.setup(with: text.wrappedValue, format: format)
+        textView.setup(with: text.wrappedValue)
         textView.configuration = config
         viewConfiguration(textView)
         return scrollView

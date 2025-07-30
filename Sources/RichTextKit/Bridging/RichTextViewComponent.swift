@@ -23,8 +23,7 @@ import AppKit
 public protocol RichTextViewComponent: AnyObject,
     RichTextPresenter,
     RichTextAttributeReader,
-    RichTextAttributeWriter,
-    RichTextDataReader
+    RichTextAttributeWriter
 {
 
     /// The text view's frame.
@@ -53,11 +52,8 @@ public protocol RichTextViewComponent: AnyObject,
 
     // MARK: - Setup
 
-    /// Setup the view with a text and data format.
-    func setup(
-        with text: NSAttributedString,
-        format: RichTextDataFormat
-    )
+    /// Setup the view with a text
+    func setup(with text: NSAttributedString)
 
     // MARK: - Functions
 
@@ -100,14 +96,5 @@ public extension RichTextViewComponent {
         let newRange = NSRange(location: index, length: 0)
         let safeRange = safeRange(for: newRange)
         setSelectedRange(safeRange)
-    }
-
-    /// Setup the view with data and a data format.
-    func setup(
-        with data: Data,
-        format: RichTextDataFormat
-    ) throws {
-        let string = try NSAttributedString(data: data, format: format)
-        setup(with: string, format: format)
     }
 }

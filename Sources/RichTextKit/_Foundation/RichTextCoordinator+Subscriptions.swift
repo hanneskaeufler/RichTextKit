@@ -6,7 +6,6 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(tvOS) || os(visionOS)
 import SwiftUI
 
 extension RichTextCoordinator {
@@ -50,4 +49,3 @@ private extension RichTextCoordinator {
         }
     }
 }
-#endif
