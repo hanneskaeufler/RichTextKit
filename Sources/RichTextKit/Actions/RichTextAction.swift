@@ -19,9 +19,6 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Copy the currently selected text, if any.
     case copy
 
-    /// Dismiss any presented software keyboard.
-    case dismissKeyboard
-
     /// Delete the selected text.
     case deleteSelectedText
 
@@ -96,7 +93,6 @@ public extension RichTextAction {
         case .copy: .richTextCopy
         case .deleteSelectedText: .richTextDelete
         case .deleteText: .richTextDelete
-        case .dismissKeyboard: .richTextDismissKeyboard
         case .pasteText: .richTextDocuments
         case .redoLatestChange: .richTextRedo
         case .replaceSelectedText: .richTextReplace
@@ -147,7 +143,6 @@ public extension RichTextAction {
         case .copy: .actionCopy
         case .deleteSelectedText: .actionDelete
         case .deleteText: .actionDelete
-        case .dismissKeyboard: .actionDismissKeyboard
         case .pasteText: .pasteText
         case .redoLatestChange: .actionRedoLatestChange
         case .replaceSelectedText: .actionDelete

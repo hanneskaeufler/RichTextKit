@@ -23,7 +23,6 @@ public extension RichTextContext {
         case .copy: canCopy
         case .deleteSelectedText: hasSelectedRange
         case .deleteText: true
-        case .dismissKeyboard: true
         case .pasteText: true
         case .redoLatestChange: canRedoLatestChange
         case .replaceSelectedText: hasSelectedRange
