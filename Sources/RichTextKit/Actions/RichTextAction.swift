@@ -43,9 +43,6 @@ public enum RichTextAction: Identifiable, Equatable, RichTextLabelValue {
     /// Set the entire attributed string.
     case setAttributedString(NSAttributedString)
 
-    // Change highlighting style
-    case setHighlightingStyle(RichTextHighlightingStyle)
-
     /// Set a certain ``RichTextStyle``.
     case setStyle(RichTextStyle, Bool)
 
@@ -75,7 +72,6 @@ public extension RichTextAction {
         case .replaceText: .richTextReplace
         case .selectRange: .richTextSelection
         case .setAttributedString: .richTextDocument
-        case .setHighlightingStyle: .richTextAlignmentCenter
         case .setStyle(let style, _): style.icon
         case .toggleStyle(let val): val.icon
         case .undoLatestChange: .richTextUndo
@@ -114,7 +110,6 @@ public extension RichTextAction {
         case .replaceText: .actionDelete
         case .selectRange: .selectRange
         case .setAttributedString: .setAttributedString
-        case .setHighlightingStyle: .highlightingStyle
         case .setStyle(let style, _): style.titleKey
         case .toggleStyle(let style): style.titleKey
         case .undoLatestChange: .actionUndoLatestChange

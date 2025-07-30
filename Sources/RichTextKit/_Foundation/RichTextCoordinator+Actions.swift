@@ -24,7 +24,6 @@ extension RichTextCoordinator {
         case .replaceText(let range, let text): textView.replaceText(in: range, with: text)
         case .selectRange(let range): setSelectedRange(to: range)
         case .setAttributedString(let string): setAttributedString(to: string)
-        case .setHighlightingStyle(let style): textView.highlightingStyle = style
         case .setStyle(let style, let newValue): setStyle(style, to: newValue)
         case .toggleStyle(let style): textView.toggleRichTextStyle(style)
         case .undoLatestChange:

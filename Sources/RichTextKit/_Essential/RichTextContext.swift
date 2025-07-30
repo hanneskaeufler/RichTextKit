@@ -64,9 +64,6 @@ public class RichTextContext: ObservableObject {
     /// Whether or not the latest change can be undone.
     @Published public internal(set) var canUndoLatestChange = false
 
-    /// The style to apply when highlighting a range.
-    @Published public internal(set) var highlightingStyle = RichTextHighlightingStyle.standard
-
     /// The current rich text styles.
     @Published public internal(set) var styles = [RichTextStyle: Bool]()
 

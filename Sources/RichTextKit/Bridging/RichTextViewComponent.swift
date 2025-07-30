@@ -29,9 +29,6 @@ public protocol RichTextViewComponent: AnyObject,
     /// The text view's frame.
     var frame: CGRect { get }
 
-    /// The style to use when highlighting text in the view.
-    var highlightingStyle: RichTextHighlightingStyle { get set }
-
     /// Whether or not the text view is the first responder.
     var isFirstResponder: Bool { get }
 

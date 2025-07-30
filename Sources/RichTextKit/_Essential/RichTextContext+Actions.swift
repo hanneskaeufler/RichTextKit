@@ -29,7 +29,6 @@ public extension RichTextContext {
         case .replaceText: true
         case .selectRange: true
         case .setAttributedString: true
-        case .setHighlightingStyle: true
         case .setStyle: true
         case .toggleStyle: true
         case .undoLatestChange: canUndoLatestChange

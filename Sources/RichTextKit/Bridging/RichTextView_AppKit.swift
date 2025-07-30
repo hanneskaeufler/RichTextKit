@@ -22,9 +22,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Properties
 
-    /// The style to use when highlighting text in the view.
-    public var highlightingStyle: RichTextHighlightingStyle = .standard
-
     open override func scrollWheel(with event: NSEvent) {
         return super.scrollWheel(with: event)
     }

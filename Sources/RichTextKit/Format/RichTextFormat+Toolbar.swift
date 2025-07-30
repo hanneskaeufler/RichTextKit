@@ -6,30 +6,11 @@
 //  Copyright © 2022-2024 Daniel Saidi. All rights reserved.
 //
 
-#if iOS || macOS || os(visionOS)
 import SwiftUI
 
 public extension RichTextFormat {
 
-    /**
-     This horizontal toolbar provides text format controls.
-
-     This toolbar adapts the layout based on horizontal size
-     class. The control row is split in two for compact size,
-     while macOS and regular sizes get a single row.
-
-     You can configure and style the view by applying config
-     and style view modifiers to your view hierarchy:
-
-     ```swift
-     VStack {
-     ...
-     }
-     .richTextFormatToolbarStyle(...)
-     .richTextFormatToolbarConfig(...)
-     ```
-     */
-    struct Toolbar: RichTextFormatToolbarBase {
+    struct Toolbar: View {
 
         /**
          Create a rich text format sheet.
@@ -46,50 +27,28 @@ public extension RichTextFormat {
         @ObservedObject
         private var context: RichTextContext
 
-        @Environment(\.richTextFormatToolbarConfig)
-        var config
-
-        @Environment(\.richTextFormatToolbarStyle)
-        var style
-
-        @Environment(\.horizontalSizeClass)
-        private var horizontalSizeClass
+        var config = RichTextFormat.ToolbarConfig()
 
         public var body: some View {
-            VStack(spacing: style.spacing) {
-                controls
+            VStack(spacing: 10) {
+                HStack {
+                    HStack {
+                        RichTextStyle.ToggleGroup(
+                            context: context,
+                            styles: config.styles
+                        )
+                    }
+                }
+                .padding(.horizontal, 10)
             }
             .labelsHidden()
-            .padding(.vertical, style.padding)
-            .environment(\.sizeCategory, .medium)
-            .background(background)
-        }
-    }
-}
-
-// MARK: - Views
-
-private extension RichTextFormat.Toolbar {
-
-    var background: some View {
-        Color.clear
-            .overlay(Color.primary.opacity(0.1))
-            .shadow(color: .black.opacity(0.1), radius: 5)
-            .edgesIgnoringSafeArea(.all)
-    }
-
-    @ViewBuilder
-    var controls: some View {
-            HStack {
-                controlsContent
-            }
-            .padding(.horizontal, style.padding)
-    }
-
-    @ViewBuilder
-    var controlsContent: some View {
-        HStack {
-            styleToggleGroup(for: context)
+            .padding(.vertical, 10)
+            .background(
+                Color.clear
+                .overlay(Color.primary.opacity(0.1))
+                .shadow(color: .black.opacity(0.1), radius: 5)
+                .edgesIgnoringSafeArea(.all)
+            )
         }
     }
 }
@@ -101,27 +60,13 @@ private extension RichTextFormat.Toolbar {
         @StateObject
         private var context = RichTextContext()
 
-        var toolbar: some View {
-            RichTextFormat.Toolbar(
-                context: context
-            )
-            .richTextFormatToolbarConfig(.init(
-                styles: .all,
-            ))
-        }
-
         var body: some View {
             VStack(spacing: 0) {
                 Color.red
-                toolbar
+                RichTextFormat.Toolbar(context: context)
             }
-            .richTextFormatToolbarStyle(.init(
-                padding: 10,
-                spacing: 10
-            ))
         }
     }
 
     return Preview()
 }
-#endif

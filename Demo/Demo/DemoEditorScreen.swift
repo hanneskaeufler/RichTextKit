@@ -39,7 +39,6 @@ struct DemoEditorScreen: View {
         .frame(minWidth: 500)
         .focusedValue(\.richTextContext, context)
         .toolbarRole(.automatic)
-        .richTextFormatToolbarConfig(.init())
         .viewDebug()
         .onChange(of: document) { oldValue, newValue in
             print("FIRE")
