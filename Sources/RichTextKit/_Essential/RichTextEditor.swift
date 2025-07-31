@@ -33,7 +33,7 @@ import SwiftUI
  For more information, see ``RichTextKeyboardToolbarConfig``
  and ``RichTextKeyboardToolbarStyle``.
  */
-public struct RichTextEditor: ViewRepresentable {
+public struct RichTextEditor: NSViewRepresentable {
 
     /// Create a rich text editor with a rich text value and
     /// a certain rich text data format.

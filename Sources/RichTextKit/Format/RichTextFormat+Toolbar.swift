@@ -56,7 +56,6 @@ public extension RichTextFormat {
 
         var body: some View {
             VStack(spacing: 0) {
-                Color.red
                 RichTextFormat.Toolbar(context: context)
             }
         }
