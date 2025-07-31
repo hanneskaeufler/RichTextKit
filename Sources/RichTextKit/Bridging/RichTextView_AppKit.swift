@@ -46,23 +46,6 @@ open class RichTextView: NSTextView, RichTextViewComponent {
 
     // MARK: - Open Functionality
 
-    /**
-     Alert a certain title and message.
-
-     - Parameters:
-       - title: The alert title.
-       - message: The alert message.
-       - buttonTitle: The alert button title.
-     */
-    open func alert(title: String, message: String, buttonTitle: String) {
-        let alert = NSAlert()
-        alert.messageText = title
-        alert.informativeText = message
-        alert.alertStyle = NSAlert.Style.warning
-        alert.addButton(withTitle: buttonTitle)
-        alert.runModal()
-    }
-
     /// Copy the current selection.
     open func copySelection() {
         let pasteboard = NSPasteboard.general

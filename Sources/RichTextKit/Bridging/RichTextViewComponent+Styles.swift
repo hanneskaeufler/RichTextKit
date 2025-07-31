@@ -47,9 +47,7 @@ public extension RichTextViewComponent {
     }
 
     /// Toggle a certain style.
-    func toggleRichTextStyle(
-        _ style: RichTextStyle
-    ) {
+    func toggleRichTextStyle(_ style: RichTextStyle) {
         let hasStyle = hasRichTextStyle(style)
         setRichTextStyle(style, to: !hasStyle)
     }
