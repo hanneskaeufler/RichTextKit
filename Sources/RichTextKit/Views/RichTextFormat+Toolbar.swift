@@ -35,7 +35,8 @@ public extension RichTextFormat {
                     HStack {
                         RichTextStyle.ToggleGroup(
                             context: context,
-                            styles: config.styles
+                            styles: config.styles,
+                            greedy: false,
                         )
                     }
                 }
