@@ -43,12 +43,6 @@ public extension RichTextFormat {
             }
             .labelsHidden()
             .padding(.vertical, 10)
-            .background(
-                Color.clear
-                .overlay(Color.primary.opacity(0.1))
-                .shadow(color: .black.opacity(0.1), radius: 5)
-                .edgesIgnoringSafeArea(.all)
-            )
         }
     }
 }
